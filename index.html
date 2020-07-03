@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+<body>
+
+<header>
+    <a id="headerbar" href="#">ROCK, PAPER, SCISSORS</a>
+</header>
+
+<main>
+<section id="content">
+<div id="instructions">
+    <p>Choose your tool to battle:</p>
+</div>
+
+<div id="tools">
+    <img src="rock.png" class="toolimg" alt="" id="rockimg">
+    <img src="paper.png" class="toolimg" alt="" id="paperimg">
+    <img src="scissors.png" class="toolimg" alt="" id="scissorsimg">
+</div>
+
+<div id="choices">
+    <p class="choice" id="playerchoice">You have chosen:</p>
+    <p class="choice" id="computerchoice">Your opponent has chosen:</p>
+</div>
+
+<div id="playbutton">
+    <label for="playgame"></label>   
+    <input type=submit class="submit" id="playgame" value="PLAY"></input>
+</div>
+
+<div id="resetbutton">
+    <label for="reset"></label>   
+    <input type=submit class="submit" id="reset" value="RESET"></input>
+</div>
+
+<div id="showresult">
+    <p id="playerscore"></p>
+    <p id="results"></p>
+    <p id="computerscore"></p>
+</div>
+
+</section>
+</main>
+
+<script src="main.js"></script>
+</body>
+</head>
