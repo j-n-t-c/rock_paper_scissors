@@ -15,9 +15,11 @@ reset.style.visibility = "hidden"; //continue button hidden until game played
 results.innerHTML = "PICK YOUR TOOL TO BATTLE!"; //sets results to instructions until game
 playerscore.style.visibility = "hidden"; //hides score box until score
 computerscore.style.visibility = "hidden";//
+
 /*-------------------------------------
      FUNCTIONS
 ---------------------------------------*/
+
 //user clicks picture to choose tool, fades non-choices, choice sets userPlay variable
 const clickRock = function() {
     userPlay = 'Rock';
@@ -38,29 +40,49 @@ const clickScissors = function() {
     paperImg.style.opacity = '0.2';
     scissorsImg.style.opacity = '1';}
 //onclick events for click functions, allows to be removed later?
-rockImg.addEventListener("click", clickRock);
-paperImg.addEventListener("click", clickPaper);
-scissorsImg.addEventListener("click", clickScissors);
+const addClicks = function(){
+    rockImg.addEventListener("click", clickRock);
+    paperImg.addEventListener("click", clickPaper);
+    scissorsImg.addEventListener("click", clickScissors);}
+
+//runs clicks
+    addClicks()
+
 //removes clickability and assigning choices after rounds, run on PLAY
 //also removes hover and cursor events
   const removeClicks = function() {
     rockImg.removeEventListener("click", clickRock);
     paperImg.removeEventListener("click", clickPaper);
     scissorsImg.removeEventListener("click", clickScissors);
-    toolimg.style}
+    //const imgclass = document.getElementById('rockImg')
+    rockimg.classList.remove('toolimg');
+    paperimg.classList.remove('toolimg');
+    scissorsimg.classList.remove('toolimg');
+   }
 
   //function to stop game either side gets three points, hides poi
   const gameCounter = function() {
-    const hideChoices = function(){
-        playgame.style.visibility = "hidden";
-        reset.style.visibility = "hidden";
       if (playerScore >= 3) {
           outcome = "Victory is yours!";
-          hideChoices();
+          playgame.style.visibility = "hidden";
+          reset.style.visibility = "hidden";
+          rockimg.style.visibility = "hidden";
+          paperimg.style.visibility = "hidden";
+          scissorsimg.style.visibility = "hidden";
+         playerchoice.style.visibility = "hidden";
+         computerchoice.style.visibility = "hidden";
+         results.style.transform="scale(4,4)"
       } else if (computerScore >= 3){
           outcome = "You have been defeated!";
-          hideChoices();
-      } }
+          playgame.style.visibility = "hidden";
+          reset.style.visibility = "hidden";
+          rockimg.style.visibility = "hidden";
+          paperimg.style.visibility = "hidden";
+          scissorsimg.style.visibility = "hidden";
+          playerchoice.style.visibility = "hidden";
+         computerchoice.style.visibility = "hidden";
+         results.style.transform="scale(4,4)";
+      } 
     }
 
 //chooses random choice for toolRandom variable and sets choice text
@@ -133,7 +155,7 @@ document.getElementById("playgame").addEventListener("click", function() {
     gameCounter();
     userPlay = void 0;
     toolRandom = void 0;
-    document.getElementById("playgame").value = "PLAY AGAIN!";
+    document.getElementById("playgame").value = "PLAY";
     document.getElementById("results").innerHTML = outcome;
     playerscore.style.visibility = "visible";
     computerscore.style.visibility = "visible";
@@ -178,7 +200,7 @@ const userImage = function() {
 document.getElementById("reset").addEventListener("click", function() {
     playgame.style.visibility = "visible";
     results.innerHTML = "CHOOSE YOUR TOOL TO BATTLE!";
-    document.getElementById("playgame").value = "PLAY AGAIN!";
+    document.getElementById("playgame").value = "PLAY";
     reset.style.visibility = "hidden";
     rockimg.style.visibility = "visible";
     paperimg.style.visibility = "visible";
@@ -186,4 +208,8 @@ document.getElementById("reset").addEventListener("click", function() {
     document.getElementById("playerchoice").innerHTML = "You pick: ";
     document.getElementById("computerchoice").innerHTML = "The computer picks: ";
     resetImage();
+    addClicks();
+    rockimg.classList.add('toolimg');
+    paperimg.classList.add('toolimg');
+    scissorsimg.classList.add('toolimg');
     });

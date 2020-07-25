@@ -56,6 +56,13 @@ header {
     cursor: grab;
 }
 
+.nohover {
+    max-width: 150px;
+    max-height: 150px;
+    margin: 20px 60px 20px 60px;
+    justify-content: space-between;
+}
+
 #choices {
     display: flex;
     flex-direction: row;
