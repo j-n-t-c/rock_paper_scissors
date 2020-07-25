@@ -9,9 +9,13 @@
 
 <main>
 <section id="content">
-<div id="instructions">
-    <p>Choose your tool to battle:</p>
+
+<div id="showresult">
+    <p class="results" id="playerscore"></p>
+    <p class="results" id="results"></p>
+    <p class="results" id="computerscore"></p>
 </div>
+
 
 <div id="tools">
     <img src="rock.png" class="toolimg" alt="" id="rockimg">
@@ -20,8 +24,8 @@
 </div>
 
 <div id="choices">
-    <p class="choice" id="playerchoice">You have chosen:</p>
-    <p class="choice" id="computerchoice">Your opponent has chosen:</p>
+    <p class="choice" id="playerchoice">You pick:</p>
+    <p class="choice" id="computerchoice">The computer picks:</p>
 </div>
 
 <div id="playbutton">
@@ -31,13 +35,7 @@
 
 <div id="resetbutton">
     <label for="reset"></label>   
-    <input type=submit class="submit" id="reset" value="RESET"></input>
-</div>
-
-<div id="showresult">
-    <p id="playerscore"></p>
-    <p id="results"></p>
-    <p id="computerscore"></p>
+    <input type=submit class="submit" id="reset" value="CONTINUE"></input>
 </div>
 
 </section>

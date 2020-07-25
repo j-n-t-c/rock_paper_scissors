@@ -1,57 +1,80 @@
-
-//hides reset button until game is played
-reset.style.visibility = "hidden";
-
+//variables
+var rockImg = document.getElementById("rockimg")
+var paperImg = document.getElementById("paperimg")
+var scissorsImg = document.getElementById("scissorsimg")
 //sets array of choices for computerPlay variable
 var tools = ["Rock","Paper","Scissors"];
-//variables
 var userPlay
 var computerPlay
 var outcome
 var playerScore = 0
 var computerScore = 0
 
-//user clicks picture to choose tool, choice sets userPlay variable
-document.getElementById("rockimg").addEventListener("click", function() {
+//onload
+reset.style.visibility = "hidden"; //continue button hidden until game played
+results.innerHTML = "PICK YOUR TOOL TO BATTLE!"; //sets results to instructions until game
+playerscore.style.visibility = "hidden"; //hides score box until score
+computerscore.style.visibility = "hidden";//
+/*-------------------------------------
+     FUNCTIONS
+---------------------------------------*/
+//user clicks picture to choose tool, fades non-choices, choice sets userPlay variable
+const clickRock = function() {
     userPlay = 'Rock';
-    document.getElementById("playerchoice").innerHTML = "You have chosen: ROCK!";
-  });
-document.getElementById("paperimg").addEventListener("click", function() {
+    document.getElementById("playerchoice").innerHTML = "You pick: ROCK!";
+    rockImg.style.opacity = '1';
+    paperImg.style.opacity = '0.2';
+    scissorsImg.style.opacity = '0.2';}
+const clickPaper = function() {
     userPlay = 'Paper';
-    document.getElementById("playerchoice").innerHTML = "You have chosen: PAPER!";
-  });
-document.getElementById("scissorsimg").addEventListener("click", function() {
+    document.getElementById("playerchoice").innerHTML = "You pick: PAPER!";
+    rockImg.style.opacity = '0.2';
+    paperImg.style.opacity = '1';
+    scissorsImg.style.opacity = '0.2';}
+const clickScissors = function() {
     userPlay = 'Scissors';
-    document.getElementById("playerchoice").innerHTML = "You have chosen: SCISSORS!";
-  });
+    document.getElementById("playerchoice").innerHTML = "You pick: SCISSORS!";
+    rockImg.style.opacity = '0.2';
+    paperImg.style.opacity = '0.2';
+    scissorsImg.style.opacity = '1';}
+//onclick events for click functions, allows to be removed later?
+rockImg.addEventListener("click", clickRock);
+paperImg.addEventListener("click", clickPaper);
+scissorsImg.addEventListener("click", clickScissors);
+//removes clickability and assigning choices after rounds, run on PLAY
+//also removes hover and cursor events
+  const removeClicks = function() {
+    rockImg.removeEventListener("click", clickRock);
+    paperImg.removeEventListener("click", clickPaper);
+    scissorsImg.removeEventListener("click", clickScissors);
+    toolimg.style}
 
-  //function to stop game either side gets three points
-  function gameCounter() {
+  //function to stop game either side gets three points, hides poi
+  const gameCounter = function() {
+    const hideChoices = function(){
+        playgame.style.visibility = "hidden";
+        reset.style.visibility = "hidden";
       if (playerScore >= 3) {
           outcome = "Victory is yours!";
-          playgame.style.visibility = "hidden";
-          reset.style.visibility = "hidden";
-          computerchoice.style.visibility = "hidden";
-          playerchoice.style.visibility = "hidden";
+          hideChoices();
       } else if (computerScore >= 3){
           outcome = "You have been defeated!";
-          playgame.style.visibility = "hidden";
-          reset.style.visibility = "hidden";
-          playerchoice.style.visibility = "hidden";
-          computerchoice.style.visibility = "hidden";
-      } 
+          hideChoices();
+      } }
     }
 
 //chooses random choice for toolRandom variable and sets choice text
 function computerPlay() {
     toolRandom = tools[Math.floor(Math.random() * tools.length)];
-    document.getElementById("computerchoice").innerHTML = ('Your opponent has chosen: ' + toolRandom.toUpperCase() + '!');
+    document.getElementById("computerchoice").innerHTML = ('The computer picks: ' + toolRandom.toUpperCase() + '!');
     return toolRandom;
 }
 
 //can't use switch because only checks the one expression
 //determines winner of game by comparing variables
 function playRound() {
+    document.getElementById("computerscore").innerHTML = "Computer points: " + computerScore;
+    document.getElementById("playerscore").innerHTML = "Your points: " + playerScore;
             //tie
     if ((userPlay === 'Rock' && toolRandom === 'Rock') || (userPlay === 'Paper' && toolRandom === 'Paper') 
              || (userPlay === 'Scissors' && toolRandom === 'Scissors')) { 
@@ -96,36 +119,71 @@ function playRound() {
     //starts game when PLAY is clicked, runs game function and changes buttons
 document.getElementById("playgame").addEventListener("click", function() {
     if (userPlay === undefined) {
-        alert("You must choose your tool!");
+        alert("You must pick your tool!");
         return;
     }
-    computerPlay();
-    playRound();
+    computerPlay(); //gets computer choice
+    userImage(); //changes left hand image to user choice at result
+    computerImage(); //changes right image to user choice at result
+    playRound(); //determines winner
     playgame.style.visibility = "hidden";
     reset.style.visibility = "visible";
     results.style.visibility = "visible";
-    instructions.style.visibility = "hidden";
-    rockimg.style.visibility = "hidden";
     paperimg.style.visibility = "hidden";
-    scissorsimg.style.visibility = "hidden";
     gameCounter();
     userPlay = void 0;
     toolRandom = void 0;
     document.getElementById("playgame").value = "PLAY AGAIN!";
     document.getElementById("results").innerHTML = outcome;
-    
+    playerscore.style.visibility = "visible";
+    computerscore.style.visibility = "visible";
+    removeClicks();
     });
+
+
+//function to change images based on user choice
+const userImage = function() {
+    if (userPlay === 'Paper') {
+        document.getElementById('rockimg').src = 'paper.png';
+        rockImg.style.opacity = '1';
+    } else if (userPlay === 'Scissors') {
+        document.getElementById('rockimg').src = 'scissors.png';
+        rockImg.style.opacity = '1';
+    } else{ document.getElementById('rockimg').src = 'rock.png'; 
+    rockImg.style.opacity = '1';}
+}
+//function to change images based on computer choice
+    const computerImage = function() {
+        if (toolRandom === 'Rock') {
+            document.getElementById('scissorsimg').src = 'rock.png';
+            scissorsImg.style.opacity = '1';
+        } else if (toolRandom === 'Paper') {
+            document.getElementById('scissorsimg').src = 'paper.png';
+            scissorsImg.style.opacity = '1';
+        } else{ document.getElementById('scissorsimg').src = 'scissors.png';
+        scissorsImg.style.opacity = '1';}
+    }
+
+//function to reset back to three main image spacing
+    const resetImage = function() {
+        document.getElementById('rockimg').src = 'rock.png';
+        document.getElementById('paperimg').src = 'paper.png';
+        document.getElementById('scissorsimg').src = 'scissors.png';
+        rockImg.style.opacity = '1';
+        paperImg.style.opacity = '1';
+        scissorsImg.style.opacity = '1';
+    }
 
     //resets game, shows play button again, resets choices and variables
 document.getElementById("reset").addEventListener("click", function() {
     playgame.style.visibility = "visible";
+    results.innerHTML = "CHOOSE YOUR TOOL TO BATTLE!";
     document.getElementById("playgame").value = "PLAY AGAIN!";
     reset.style.visibility = "hidden";
-    results.style.visibility = "hidden";
-    instructions.style.visibility = "visible";
     rockimg.style.visibility = "visible";
     paperimg.style.visibility = "visible";
     scissorsimg.style.visibility = "visible";
-    document.getElementById("playerchoice").innerHTML = "You have chosen: ";
-    document.getElementById("computerchoice").innerHTML = "Your opponent has chosen: ";
+    document.getElementById("playerchoice").innerHTML = "You pick: ";
+    document.getElementById("computerchoice").innerHTML = "The computer picks: ";
+    resetImage();
     });
